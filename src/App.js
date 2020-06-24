@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const apiUrl = 'http://localhost:4010';
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      url: '',
+      title: '',
+      src: ''
+    }
+  }
+
+  handleInput = (event) => {
+    this.setState({ url: event.target.value });
+  }
+
+  checkLink = () => {
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ url: this.state.url })
+    })
+      .then(res => res.json())
+      .then(items => this.setState({
+        src: items.url,
+        title: items.title
+      }));
+  }
+  render() {
+    const { src, title } = this.state;
+    return (
+      <div className="container">
+        <h1 className="header">Link Checker</h1>
+        <div className="input-group">
+          <input className="url-input" type="text" onChange={this.handleInput} />
+          <input className="button" type="button" value="Check" onClick={this.checkLink} />
+        </div>
+        <div className="result">
+          <img className="image" src={src} alt={title} />
+          <div className="title">{title}</div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
