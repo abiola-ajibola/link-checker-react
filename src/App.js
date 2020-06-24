@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-const apiUrl = 'http://localhost:4010';
+const apiUrl = 'https://link-checker-api.uc.r.appspot.com/';
 
 class App extends React.Component {
   constructor() {
