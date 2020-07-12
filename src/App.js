@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 
-const apiUrl = process.env.API_URL;
+const apiUrl = "https://link-checker-api.herokuapp.com/";
+// const apiUrl = "http://localhost:4001";
 
 class App extends React.Component {
   constructor() {
