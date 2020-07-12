@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-const apiUrl = 'https://link-checker-api.uc.r.appspot.com/';
+const apiUrl = process.env.API_URL;
 
 class App extends React.Component {
   constructor() {
@@ -31,6 +31,7 @@ class App extends React.Component {
         title: items.title
       }));
   }
+  
   render() {
     const { src, title } = this.state;
     return (
